@@ -42,7 +42,7 @@ Memory](https://paperswithcode.com/paper/self-attention-does-not-need-o-n-2-memo
 
 ## multimodal
 
-Natural Language Descriptions of Deep Visual Features](https://openreview.net/forum?id=NudBMY-tzDr)
+[Natural Language Descriptions of Deep Visual Features](https://openreview.net/forum?id=NudBMY-tzDr)
 
 ## applications
 
