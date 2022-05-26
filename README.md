@@ -3,6 +3,8 @@
 Since 2020 I organize a book club in irregular time frames.
 This repository is an attempt to add structure to it and maybe go back to the monthly formats like it was in the beginning.
 
+**Notice:** the idea is to structure future book clubs after *26.05.2022* older book clubs won't be documented here.
+
 
 ## how does a book club work:
 
