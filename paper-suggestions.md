@@ -24,6 +24,7 @@ Memory](https://paperswithcode.com/paper/self-attention-does-not-need-o-n-2-memo
 [Rethinking Generalization of Neural Models: A Named Entity Recognition Case Study](https://arxiv.org/abs/2001.03844)
 [A Comparative Study of Pre-trained Encoders for Low-Resource Named Entity Recognition](https://paperswithcode.com/paper/a-comparative-study-of-pre-trained-encoders-1)
 [Boundary Smoothing for Named Entity Recognition](https://paperswithcode.com/paper/boundary-smoothing-for-named-entity-1)
+[CycleNER: An Unsupervised Training Approach for Named Entity Recognition](https://dl.acm.org/doi/10.1145/3485447.3512012)
 
 ## pruning
 
