@@ -53,6 +53,7 @@ Memory](https://paperswithcode.com/paper/self-attention-does-not-need-o-n-2-memo
 # Large Language Model
 
 [GPT-NeoX-20B: An Open-Source Autoregressive Language Model](https://paperswithcode.com/paper/gpt-neox-20b-an-open-source-autoregressive-1)
+
 [OPT: Open Pre-trained Transformer Language Models](https://paperswithcode.com/paper/opt-open-pre-trained-transformer-language)
 
 ## General papers
