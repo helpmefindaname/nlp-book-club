@@ -50,11 +50,15 @@ Memory](https://paperswithcode.com/paper/self-attention-does-not-need-o-n-2-memo
 
 [A Benchmark for Automatic Medical Consultation System: Frameworks, Tasks and Datasets](https://paperswithcode.com/paper/a-benchmark-for-automatic-medical)
 
-# Large Language Model
+## Large Language Model
 
 [GPT-NeoX-20B: An Open-Source Autoregressive Language Model](https://paperswithcode.com/paper/gpt-neox-20b-an-open-source-autoregressive-1)
 
 [OPT: Open Pre-trained Transformer Language Models](https://paperswithcode.com/paper/opt-open-pre-trained-transformer-language)
+
+## Transfer Learning
+
+[Pre-Train Your Loss: Easy Bayesian Transfer Learning with Informative Priors](https://arxiv.org/pdf/2205.10279.pdf)
 
 ## General papers
 Papers that are more general and not limited to nlp. (or even focused on only other tasks)
@@ -72,3 +76,5 @@ Papers that are more general and not limited to nlp. (or even focused on only ot
 [RISP: Rendering-Invariant State Predictor with Differentiable Simulation and Rendering for Cross-Domain Parameter Estimation](https://openreview.net/forum?id=uSE03demja)
 
 [StyleAlign: Analysis and Applications of Aligned StyleGAN Models](https://arxiv.org/abs/2110.11323)
+
+[Prioritized Training on Points that are Learnable, Worth Learning, and Not Yet Learnt](https://arxiv.org/pdf/2206.07137.pdf)
