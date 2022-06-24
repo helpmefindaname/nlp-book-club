@@ -44,6 +44,8 @@ Memory](https://paperswithcode.com/paper/self-attention-does-not-need-o-n-2-memo
 
 [Natural Language Descriptions of Deep Visual Features](https://openreview.net/forum?id=NudBMY-tzDr)
 
+[LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking](https://arxiv.org/pdf/2204.08387.pdf)
+
 ## applications
 
 [Automated Crossword Solving](https://paperswithcode.com/paper/automated-crossword-solving-1)
