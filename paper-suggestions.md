@@ -18,6 +18,8 @@
 
 [Compositional Attention: Disentangling Search and Retrieval](https://openreview.net/forum?id=IwJPj2MBcIa)
 
+[Are We There Yet? A Decision Framework for Replacing Term Based Retrieval with Dense Retrieval Systems](https://arxiv.org/abs/2206.12993)
+
 ## NER
 
 [Automated Concatenation of Embeddings for Structured Prediction](https://arxiv.org/abs/2010.05006)
