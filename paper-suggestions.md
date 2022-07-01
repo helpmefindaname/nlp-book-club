@@ -16,6 +16,8 @@
 
 ## search
 
+[Introducing Neural Bag of Whole-Words with ColBERTer: Contextualized Late Interactions using Enhanced Reduction](https://arxiv.org/pdf/2203.13088.pdf)
+
 [Compositional Attention: Disentangling Search and Retrieval](https://openreview.net/forum?id=IwJPj2MBcIa)
 
 [Are We There Yet? A Decision Framework for Replacing Term Based Retrieval with Dense Retrieval Systems](https://arxiv.org/abs/2206.12993)
