@@ -6,6 +6,10 @@
 
 [Self-attention Does Not Need Memory](https://paperswithcode.com/paper/self-attention-does-not-need-o-n-2-memory)
 
+## pretrained embeddings
+
+[Language Modelling with Pixels](https://arxiv.org/pdf/2207.06991v1.pdf)
+
 ## fairness & interpretability
 
 [Fairness in Representation for Multilingual NLP: Insights from Controlled Experiments on Conditional Language Modeling](https://openreview.net/forum?id=-llS6TiOew)
