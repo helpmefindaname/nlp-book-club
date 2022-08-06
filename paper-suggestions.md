@@ -46,6 +46,8 @@
 
 [Natural Language Descriptions of Deep Visual Features](https://openreview.net/forum?id=NudBMY-tzDr)
 
+[OCR-free Document Understanding Transformer](https://arxiv.org/abs/2111.15664)
+
 ## applications
 
 [Automated Crossword Solving](https://paperswithcode.com/paper/automated-crossword-solving-1)
