@@ -1,4 +1,4 @@
-# Learning Strides in Convolutional Neural Networks
+# Train large then compress later
 
 [Paper link](https://arxiv.org/pdf/2002.11794.pdf)
 
