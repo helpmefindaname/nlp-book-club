@@ -37,7 +37,7 @@ for Natural Language Understanding
 ## Low Precision Inference
 
 * Why are 8bit quantized matrix multiplications on the CPU so much faster than 32-bit floats? How big is the speedup?
-* Why is the GPU using 16 bit-flaots instead of 8-bit? What speedup could be achieved?
+* Why is the GPU using 16 bit-floats instead of 8-bit? What speedup could be achieved?
 
 ## Runtime Optimization
 
