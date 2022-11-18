@@ -49,7 +49,7 @@ for Natural Language Understanding
 * What are dynamic sequence lengths?
 * Looking at **Table 3** what brings the biggest speed-up?
 * How would you assume the implementation cost of the methods of **Table 3**?
-* Looking at **Table 4** How do the Speed ups and Engergy Savings look for the Systems provided?
+* Looking at **Table 4** How do the Speed ups and Energy Savings look for the Systems provided?
 
 ## Conclusions, Implications and final thoughts
 
