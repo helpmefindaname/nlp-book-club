@@ -1,0 +1,33 @@
+name: 'Create Event on discord'
+on:
+  schedule:
+    - cron: "10 0 15 * *"
+
+env:
+  POETRY_VERSION: 1.5.1
+  python-version: 3.9
+
+jobs:
+  create_event:
+    name: Create the next event on discord
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - name: setup python ${{ env.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.python-version }}
+          cache: 'poetry'
+      - name: Install Dependencies
+        run: poetry install
+      - name: Create event
+        run: |
+          poetry run python -m bot.discord create_event
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Create new Event
+          commit_user_name: Github Actions
+          commit_user_email: benedikt.fuchs.staw@hotmail.com
