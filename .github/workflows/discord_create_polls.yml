@@ -1,13 +1,13 @@
 name: 'Create polls on discord'
 on:
   schedule:
-    - cron: "35 22 21 * *"
+    - cron: "50 22 21 * *"
 
 env:
   POETRY_VERSION: 1.5.1
   python-version: 3.9
-  DISCORD_WEBHOOK_URL: secrets.DISCORD_WEBHOOK_URL
-  DISCORD_TOKEN: secrets.DISCORD_TOKEN
+  DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
 
 jobs:
   create_polls:
