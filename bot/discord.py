@@ -1,4 +1,6 @@
+import argparse
 import asyncio
+import enum
 import os
 import calendar
 from datetime import datetime, timedelta
@@ -14,10 +16,22 @@ from bot.templates import number_emojis, poll_emoji, get_poll_message_text, poll
     create_event_description, date_poll_emoji, get_date_poll_message_text, add_date_poll_closed_message, date_poll_regex
 
 
+class CmdEnum(str, enum.Enum):
+    CREATE_POLLS = "create_polls"
+    CREATE_EVENT = "create_event"
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser("start_command")
+    parser.add_argument("cmd", type=CmdEnum, choices=list(CmdEnum))
+    return parser.parse_args()
+
+
 class BookclubClient(discord.Client):
 
-    def __init__(self):
+    def __init__(self, cmd: CmdEnum):
         intents = discord.Intents.default()
+        self.cmd = cmd
         super().__init__(intents=intents)
 
     @property
@@ -46,11 +60,14 @@ class BookclubClient(discord.Client):
         await self.connect(reconnect=False)
 
     async def on_ready(self):
-        paper, _ = await self.close_poll()
-        date, _ = await self.close_date_poll()
-        await self.announce_event(paper, date=date)
-        await self.create_papers_poll()
-        await self.create_date_poll()
+        if self.cmd == CmdEnum.CREATE_POLLS:
+            await self.create_papers_poll()
+            await self.create_date_poll()
+
+        if self.cmd == CmdEnum.CREATE_EVENT:
+            paper, _ = await self.close_poll()
+            date, _ = await self.close_date_poll()
+            await self.announce_event(paper, date=date)
         await self.close()
 
     async def create_papers_poll(self):
@@ -178,14 +195,15 @@ class BookclubClient(discord.Client):
         )
 
 
-async def run_client():
-    client = BookclubClient()
+async def run_client(cmd: CmdEnum):
+    client = BookclubClient(cmd)
     await client.start_run(os.environ["DISCORD_TOKEN"])
     del client
 
 
 async def main():
-    await run_client()
+    args = parse_args()
+    await run_client(args.cmd)
 
 
 if __name__ == "__main__":
