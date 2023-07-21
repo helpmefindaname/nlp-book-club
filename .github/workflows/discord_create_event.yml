@@ -1,11 +1,13 @@
 name: 'Create Event on discord'
 on:
   schedule:
-    - cron: "20 23 21 * *"
+    - cron: "37 23 21 * *"
 
 env:
   POETRY_VERSION: 1.5.1
   python-version: 3.9
+  DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
 
 jobs:
   create_event:
