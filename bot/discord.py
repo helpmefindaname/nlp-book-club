@@ -179,10 +179,7 @@ class BookclubClient(discord.Client):
         date_str = f"{date.year:04}-{date.month:02}"
         paper_name = paper_path.stem.replace("-", " ").title()
         saved_path = events / f"{date_str}-{paper_path.name}"
-        if True:
-            released_path = saved_path
-        else:
-            released_path = paper_path.replace(saved_path)
+        released_path = paper_path.replace(saved_path)
         vc = self.voice_channel
         g = self.guild
         await g.create_scheduled_event(
