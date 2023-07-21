@@ -1,7 +1,7 @@
 name: 'Create polls on discord'
 on:
   schedule:
-    - cron: "20 0 22 * *"
+    - cron: "25 23 21 * *"
 
 env:
   POETRY_VERSION: 1.5.1
