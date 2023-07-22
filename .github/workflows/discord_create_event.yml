@@ -1,7 +1,7 @@
 name: 'Create event on discord'
 on:
   schedule:
-    - cron: "40 01 22 * *"
+    - cron: "15 02 22 * *"
 
 env:
   POETRY_VERSION: 1.5.1
