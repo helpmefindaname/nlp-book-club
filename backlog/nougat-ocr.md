@@ -15,7 +15,7 @@
 
 * what is the issue with extracting text from PDFs?
 * what is the issue with the usual OCR engines?
-* what are the promosed contributions of this paper?
+* what are the promised contributions of this paper?
 
 ## Related Work
 
