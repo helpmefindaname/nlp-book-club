@@ -3,7 +3,7 @@ import asyncio
 import enum
 import os
 import calendar
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from pathlib import Path
 from typing import Optional
 
@@ -23,13 +23,14 @@ from bot.templates import (
     get_date_poll_message_text,
     add_date_poll_closed_message,
     date_poll_regex,
-    create_event_notification,
+    create_event_notification, get_reminder_message,
 )
 
 
 class CmdEnum(str, enum.Enum):
     CREATE_POLLS = "create_polls"
     CREATE_EVENT = "create_event"
+    NOTIFY_EVENT = "notify_event"
 
 
 def parse_args() -> argparse.Namespace:
@@ -78,7 +79,20 @@ class BookclubClient(discord.Client):
             paper, _ = await self.close_poll()
             date, _ = await self.close_date_poll()
             await self.announce_event(paper, date=date)
+
+        if self.cmd == CmdEnum.NOTIFY_EVENT:
+            await self.notify_events()
         await self.close()
+
+    async def notify_events(self):
+        events = await self.guild.fetch_scheduled_events(with_counts=False)
+        for event in events:
+            start = event.start_time.date()
+            curr = date.today()
+            diff_days = (start - curr).days
+            if diff_days != 2:
+                return
+            await self.announcements_channel.send(get_reminder_message())
 
     async def create_papers_poll(self):
         an = self.announcements_channel

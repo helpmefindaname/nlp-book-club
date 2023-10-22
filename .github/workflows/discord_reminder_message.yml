@@ -1,0 +1,30 @@
+name: 'Notify for events on discord'
+on:
+  schedule:
+    - cron: "0 18 * * *"
+
+env:
+  POETRY_VERSION: 1.5.1
+  python-version: 3.9
+  DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+
+jobs:
+  notify_events:
+    name: Notify for events that are comming up soon
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - name: setup python ${{ env.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.python-version }}
+          cache: 'poetry'
+      - name: Install Dependencies
+        run: poetry install
+      - name: Create polls
+        run: |
+          poetry run python -m bot.discord notify_event

@@ -75,3 +75,9 @@ We will discuss **{paper_name}** on {date_str:%Y-%m-%d %H:%M}.
 
 Please join the event here: {event_url}
 """
+
+
+def get_reminder_message() -> str:
+    return """Friendly Reminder: The next bookclub is in 2 days. 
+Hope to see you there :-)
+"""
