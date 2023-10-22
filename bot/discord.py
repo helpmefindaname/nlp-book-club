@@ -12,8 +12,19 @@ import pytz
 from discord import TextChannel, Message, EntityType, PrivacyLevel, Guild
 
 from bot.folders import backlog, events, root_path
-from bot.templates import number_emojis, poll_emoji, get_poll_message_text, poll_regex, add_poll_closed_message, \
-    create_event_description, date_poll_emoji, get_date_poll_message_text, add_date_poll_closed_message, date_poll_regex
+from bot.templates import (
+    number_emojis,
+    poll_emoji,
+    get_poll_message_text,
+    poll_regex,
+    add_poll_closed_message,
+    create_event_description,
+    date_poll_emoji,
+    get_date_poll_message_text,
+    add_date_poll_closed_message,
+    date_poll_regex,
+    create_event_notification,
+)
 
 
 class CmdEnum(str, enum.Enum):
@@ -28,7 +39,6 @@ def parse_args() -> argparse.Namespace:
 
 
 class BookclubClient(discord.Client):
-
     def __init__(self, cmd: CmdEnum):
         intents = discord.Intents.default()
         self.cmd = cmd
@@ -74,8 +84,8 @@ class BookclubClient(discord.Client):
         an = self.announcements_channel
         papers = [p.stem.replace("-", " ").title() for p in backlog.glob("*.md")]
         emojis = number_emojis
-        papers = papers[:len(emojis)]
-        emojis = emojis[:len(papers)]
+        papers = papers[: len(emojis)]
+        emojis = emojis[: len(papers)]
 
         poll_message_text = get_poll_message_text(papers, emojis)
 
@@ -97,14 +107,16 @@ class BookclubClient(discord.Client):
         if friday.month != today.month:
             friday = friday + timedelta(days=-7)
 
-        return sorted([datetime(d.year, d.month, d.day) for d in [monday, wednesday, friday]])
+        return sorted(
+            [datetime(d.year, d.month, d.day) for d in [monday, wednesday, friday]]
+        )
 
     async def create_date_poll(self):
         an = self.announcements_channel
         dates = self.find_date_candidates()
         emojis = number_emojis
-        dates = dates[:len(emojis)]
-        emojis = emojis[:len(dates)]
+        dates = dates[: len(emojis)]
+        emojis = emojis[: len(dates)]
         poll_message_text = get_date_poll_message_text(dates, emojis)
 
         message = await an.send(poll_message_text)
@@ -118,7 +130,10 @@ class BookclubClient(discord.Client):
         async for msg in an.history(limit=5):
             if result_msg is not None:
                 continue
-            if any(reaction.me and reaction.emoji == poll_emoji for reaction in msg.reactions):
+            if any(
+                reaction.me and reaction.emoji == poll_emoji
+                for reaction in msg.reactions
+            ):
                 result_msg = msg
         return result_msg
 
@@ -128,7 +143,10 @@ class BookclubClient(discord.Client):
         async for msg in an.history(limit=5):
             if result_msg is not None:
                 continue
-            if any(reaction.me and reaction.emoji == date_poll_emoji for reaction in msg.reactions):
+            if any(
+                reaction.me and reaction.emoji == date_poll_emoji
+                for reaction in msg.reactions
+            ):
                 result_msg = msg
         return result_msg
 
@@ -141,12 +159,19 @@ class BookclubClient(discord.Client):
             for reaction in poll_msg.reactions
             if reaction.me and reaction.emoji in number_emojis
         }
-        voted_papers = {m["date"]: emoji_to_votes.get(m["emoji"], 0) for m in date_poll_regex.finditer(poll_msg.content)}
+        voted_papers = {
+            m["date"]: emoji_to_votes.get(m["emoji"], 0)
+            for m in date_poll_regex.finditer(poll_msg.content)
+        }
         winning_date_str, winning_votes = max(voted_papers.items(), key=lambda x: x[1])
         year, month, day = map(int, winning_date_str.split("-"))
-        winning_date = datetime(year, month, day, hour=19, minute=0, tzinfo=pytz.timezone('Europe/Vienna'))
-        await poll_msg.edit(content=add_date_poll_closed_message(
-            poll_msg.content, winning_date, winning_votes)
+        winning_date = datetime(
+            year, month, day, hour=19, minute=0, tzinfo=pytz.timezone("Europe/Vienna")
+        )
+        await poll_msg.edit(
+            content=add_date_poll_closed_message(
+                poll_msg.content, winning_date, winning_votes
+            )
         )
 
         return winning_date, winning_votes
@@ -160,17 +185,28 @@ class BookclubClient(discord.Client):
             for reaction in poll_msg.reactions
             if reaction.me and reaction.emoji in number_emojis
         }
-        paper_to_emoji = {m["paper"]: m["emoji"] for m in poll_regex.finditer(poll_msg.content)}
+        paper_to_emoji = {
+            m["paper"]: m["emoji"] for m in poll_regex.finditer(poll_msg.content)
+        }
 
         voted_papers = [
-            (p, emoji_to_votes.get(paper_to_emoji.get(p.stem.replace("-", " ").title(), ""), 0))
+            (
+                p,
+                emoji_to_votes.get(
+                    paper_to_emoji.get(p.stem.replace("-", " ").title(), ""), 0
+                ),
+            )
             for p in backlog.glob("*.md")
         ]
 
         winning_path, winning_votes = max(voted_papers, key=lambda x: x[1])
 
-        await poll_msg.edit(content=add_poll_closed_message(
-            poll_msg.content, winning_path.stem.replace("-", " ").title(), winning_votes)
+        await poll_msg.edit(
+            content=add_poll_closed_message(
+                poll_msg.content,
+                winning_path.stem.replace("-", " ").title(),
+                winning_votes,
+            )
         )
 
         return winning_path, winning_votes
@@ -182,13 +218,19 @@ class BookclubClient(discord.Client):
         released_path = paper_path.replace(saved_path)
         vc = self.voice_channel
         g = self.guild
-        await g.create_scheduled_event(
+        event = await g.create_scheduled_event(
             name=f"NLP-Papers-Bookclub {date_str}",
             start_time=date,
             entity_type=EntityType.voice,
             privacy_level=PrivacyLevel.guild_only,
             channel=vc,
-            description=create_event_description(date, paper_name, released_path.relative_to(root_path))
+            description=create_event_description(
+                date, paper_name, released_path.relative_to(root_path)
+            ),
+        )
+
+        await self.announcements_channel.send(
+            create_event_notification(date, paper_name, event.url)
         )
 
 
