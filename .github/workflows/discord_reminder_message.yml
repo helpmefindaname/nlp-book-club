@@ -13,6 +13,7 @@ jobs:
   notify_events:
     name: Notify for events that are comming up soon
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

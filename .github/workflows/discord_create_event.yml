@@ -13,6 +13,7 @@ jobs:
   create_event:
     name: Create the next event on discord
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

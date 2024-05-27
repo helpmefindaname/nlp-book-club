@@ -14,6 +14,7 @@ jobs:
   create_polls:
     name: Create polls for the next paper and the next date on discord
     runs-on: ubuntu-latest
+    if: false
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
